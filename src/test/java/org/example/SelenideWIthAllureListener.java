@@ -10,18 +10,15 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
-public class SelenideWIthAllureListener {
+public class SelenideWIthAllureListener extends TestBase {
 
     @Test
     public void TestIssueSearchWithAllureListener () {
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-        Configuration.browserSize = "1920x1080";
-        Configuration.browser = "chrome";
         open("https://github.com/");
         $(".header-search-input").click();
-        $(".header-search-input").setValue("sergeykrylovich/demoqa-test-pageobject");
+        $(".header-search-input").setValue(REPO);
         $(".header-search-input").submit();
-        $(byLinkText("sergeykrylovich/demoqa-test-pageobject")).click();
+        $(byLinkText(REPO)).click();
         $("[data-content=Issues]").shouldHave(text("Issues"));
 
 
